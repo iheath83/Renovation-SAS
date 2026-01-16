@@ -223,35 +223,38 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
                         </div>
 
                         {/* Colors */}
-                        <div>
-                          <label className="block text-sm font-medium text-tertiary mb-2">
-                            Palette de couleurs
-                          </label>
-                          <div className="flex items-center gap-2">
-                            {extracted.couleurs.map((color, i) => (
-                              <div
-                                key={i}
-                                className="w-10 h-10 rounded-lg border-2 border-primary shadow-lg"
-                                style={{ backgroundColor: color }}
-                                title={color}
-                              />
-                            ))}
+                        {extracted.couleurs && extracted.couleurs.length > 0 && (
+                          <div>
+                            <label className="block text-sm font-medium text-tertiary mb-2">
+                              Palette de couleurs
+                            </label>
+                            <div className="flex items-center gap-2">
+                              {extracted.couleurs.map((color, i) => (
+                                <div
+                                  key={i}
+                                  className="w-10 h-10 rounded-lg border-2 border-primary shadow-lg"
+                                  style={{ backgroundColor: color }}
+                                  title={color}
+                                />
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         {/* Tags */}
-                        <div>
-                          <label className="block text-sm font-medium text-tertiary mb-2">
-                            Tags
-                          </label>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {extracted.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-3 py-1 rounded-full bg-primary-500/20 text-primary-400 text-sm flex items-center gap-1"
-                              >
-                                <Tag className="w-3 h-3" />
-                                {tag}
+                        {extracted.tags && extracted.tags.length > 0 && (
+                          <div>
+                            <label className="block text-sm font-medium text-tertiary mb-2">
+                              Tags
+                            </label>
+                            <div className="flex flex-wrap gap-2 mb-2">
+                              {extracted.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-3 py-1 rounded-full bg-primary-500/20 text-primary-400 text-sm flex items-center gap-1"
+                                >
+                                  <Tag className="w-3 h-3" />
+                                  {tag}
                                 <button
                                   onClick={() => handleRemoveTag(tag)}
                                   className="ml-1 hover:text-red-400"
@@ -274,6 +277,7 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
                             </Button>
                           </div>
                         </div>
+                        )}
                       </div>
                     </div>
                   </motion.div>

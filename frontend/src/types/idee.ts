@@ -29,6 +29,7 @@ export interface CreateIdeeInput {
   materiaux?: any;
   style?: string;
   notes?: string;
+  [key: string]: unknown; // Index signature pour Record<string, unknown>
 }
 
 export type CreateIdeePinterestInput = CreateIdeeInput;
