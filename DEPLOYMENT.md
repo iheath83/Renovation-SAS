@@ -1,0 +1,220 @@
+# 🐳 Déploiement Docker avec Dokploy
+
+Configuration Docker Compose pour déployer RénoVision en production via Dokploy avec Traefik.
+
+## 📋 Prérequis
+
+- Dokploy installé et configuré
+- Traefik configuré dans Dokploy
+- Nom de domaine pointant vers votre serveur
+
+## 🚀 Déploiement
+
+### 1. Configuration des variables d'environnement
+
+Créer un fichier `.env` à partir du `.env.example` :
+
+```bash
+cp .env.example .env
+```
+
+Remplir les valeurs :
+
+```env
+# Domaine
+DOMAIN=votre-domaine.com
+
+# Base de données
+POSTGRES_USER=renovision
+POSTGRES_PASSWORD=mot_de_passe_securise
+POSTGRES_DB=renovision_db
+
+# JWT Secrets (générer avec: openssl rand -base64 32)
+JWT_SECRET=secret_jwt_tres_securise
+JWT_REFRESH_SECRET=secret_refresh_tres_securise
+
+# APIs optionnelles
+PINTEREST_API_KEY=votre_cle_api_pinterest
+POWENS_CLIENT_ID=votre_client_id_powens
+POWENS_CLIENT_SECRET=votre_client_secret_powens
+POWENS_REDIRECT_URI=https://votre-domaine.com/api/bank/callback
+```
+
+### 2. Lancer les services
+
+```bash
+docker-compose up -d
+```
+
+### 3. Vérifier les logs
+
+```bash
+# Tous les services
+docker-compose logs -f
+
+# Backend uniquement
+docker-compose logs -f backend
+
+# Frontend uniquement
+docker-compose logs -f frontend
+
+# Base de données
+docker-compose logs -f postgres
+```
+
+## 🏗️ Architecture
+
+```
+┌─────────────────┐
+│     Traefik     │ (géré par Dokploy)
+│  Reverse Proxy  │
+└────────┬────────┘
+         │
+         ├──────────────────────────────────┐
+         │                                  │
+         │ HTTPS (443)                      │ HTTPS (443)
+         │ votre-domaine.com                │ votre-domaine.com/api
+         │                                  │
+    ┌────▼────┐                        ┌────▼────┐
+    │Frontend │                        │ Backend │
+    │ (Nginx) │                        │ (Node)  │
+    │  :80    │                        │ :3000   │
+    └─────────┘                        └────┬────┘
+                                            │
+                                            │
+                                       ┌────▼────┐
+                                       │Postgres │
+                                       │  :5432  │
+                                       └─────────┘
+```
+
+## 🔧 Services
+
+### Frontend
+- **Image** : nginx:alpine
+- **Port** : 80
+- **Route** : `https://votre-domaine.com`
+- **Healthcheck** : HTTP GET sur `/`
+
+### Backend
+- **Image** : node:20-alpine
+- **Port** : 3000
+- **Route** : `https://votre-domaine.com/api`
+- **Healthcheck** : HTTP GET sur `/health`
+- **Migrations** : Automatiques au démarrage via Prisma
+
+### PostgreSQL
+- **Image** : postgres:16-alpine
+- **Port** : 5432 (interne uniquement)
+- **Volume** : `postgres_data`
+- **Healthcheck** : `pg_isready`
+
+## 🔍 Points importants
+
+### Reverse Proxy
+Le backend est accessible via `/api` sur le domaine principal :
+- `https://votre-domaine.com` → Frontend
+- `https://votre-domaine.com/api` → Backend (le préfixe `/api` est retiré par Traefik)
+
+### Healthchecks
+- **Backend** : `wget http://127.0.0.1:3000/health`
+- **Frontend** : `wget http://127.0.0.1:80/`
+- **Postgres** : `pg_isready`
+
+### Migrations Prisma
+Les migrations sont exécutées automatiquement au démarrage du backend via le script `entrypoint.sh`.
+
+### SSL/TLS
+Géré automatiquement par Traefik via Let's Encrypt (configuré dans Dokploy).
+
+## 🛠️ Commandes utiles
+
+```bash
+# Arrêter les services
+docker-compose down
+
+# Arrêter et supprimer les volumes
+docker-compose down -v
+
+# Reconstruire les images
+docker-compose build
+
+# Reconstruire et redémarrer
+docker-compose up -d --build
+
+# Voir les logs en temps réel
+docker-compose logs -f
+
+# Accéder au shell d'un conteneur
+docker-compose exec backend sh
+docker-compose exec frontend sh
+docker-compose exec postgres psql -U renovision -d renovision_db
+
+# Exécuter les migrations manuellement
+docker-compose exec backend npx prisma migrate deploy
+
+# Voir l'état des services
+docker-compose ps
+```
+
+## 🔐 Sécurité
+
+- ✅ Helmet.js activé pour le backend
+- ✅ CORS configuré
+- ✅ Secrets JWT sécurisés
+- ✅ Base de données isolée (réseau interne uniquement)
+- ✅ HTTPS via Let's Encrypt (Traefik)
+- ✅ Healthchecks pour tous les services
+
+## 📊 Monitoring
+
+Les healthchecks permettent à Docker et Dokploy de surveiller l'état des services :
+- **Interval** : 30s
+- **Timeout** : 10s
+- **Retries** : 3
+- **Start period** : 40s (backend), 10s (frontend)
+
+## 🔄 Mise à jour
+
+```bash
+# Pull les dernières modifications
+git pull
+
+# Reconstruire et redéployer
+docker-compose up -d --build
+
+# Vérifier que tout fonctionne
+docker-compose ps
+docker-compose logs -f
+```
+
+## 🐛 Dépannage
+
+### Le backend ne démarre pas
+```bash
+docker-compose logs backend
+# Vérifier la connexion à la base de données
+docker-compose exec backend npx prisma db push
+```
+
+### Le frontend n'est pas accessible
+```bash
+docker-compose logs frontend
+# Vérifier les labels Traefik
+docker-compose config
+```
+
+### La base de données ne répond pas
+```bash
+docker-compose logs postgres
+# Recréer le volume si nécessaire
+docker-compose down -v
+docker-compose up -d
+```
+
+## 📝 Notes
+
+- Le fichier `.env` ne doit jamais être commité
+- Les volumes Docker persistent les données entre les redémarrages
+- Traefik gère automatiquement le renouvellement des certificats SSL
+- Le middleware `stripprefix` retire `/api` avant de transmettre au backend

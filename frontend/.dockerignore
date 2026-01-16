@@ -1,0 +1,25 @@
+# Dépendances
+node_modules
+npm-debug.log
+
+# Environnement
+.env
+.env.*
+
+# Build
+dist
+build
+
+# Tests
+coverage
+test
+
+# Logs
+logs
+*.log
+
+# Misc
+.git
+.DS_Store
+*.md
+!README.md
