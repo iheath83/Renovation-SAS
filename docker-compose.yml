@@ -33,6 +33,7 @@ services:
       start_period: 40s
     networks:
       - renovision-network
+      - dokploy-network
     labels:
       # Traefik labels pour l'API
       - "traefik.enable=true"
@@ -64,6 +65,7 @@ services:
       start_period: 10s
     networks:
       - renovision-network
+      - dokploy-network
     labels:
       # Traefik labels pour le frontend
       - "traefik.enable=true"
@@ -77,3 +79,6 @@ services:
 networks:
   renovision-network:
     driver: bridge
+  dokploy-network:
+    external: true
+    name: dokploy-network
