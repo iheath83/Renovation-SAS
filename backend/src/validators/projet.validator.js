@@ -10,8 +10,12 @@ export const createProjetSchema = {
 export const updateProjetSchema = {
   body: z.object({
     name: z.string().min(1).max(255).optional(),
-    description: z.string().optional(),
-  }),
+    description: z.string().nullable().optional(),
+    adresse: z.string().nullable().optional(),
+    budgetMax: z.number().min(0).nullable().optional(),
+    dateDebut: z.string().nullable().optional(),
+    dateFin: z.string().nullable().optional(),
+  }).passthrough(),
   params: z.object({
     projetId: z.string().cuid(),
   }),

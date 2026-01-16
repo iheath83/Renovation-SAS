@@ -200,6 +200,50 @@ class ApiClient {
     }>(`/projets/${id}`);
   }
 
+  async updateProjet(projetId: string, data: Record<string, unknown>) {
+    return this.request(`/projets/${projetId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async exportProjet(projetId?: string) {
+    const pid = projetId || this.getProjetId();
+    if (!pid) throw new Error('Projet ID required');
+    
+    const response = await fetch(`${this.baseURL}/projets/${pid}/export`, {
+      headers: {
+        'Authorization': `Bearer ${this.getAccessToken()}`,
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error('Export failed');
+    }
+    
+    return response.blob();
+  }
+
+  async importProjet(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string);
+          const result = await this.request('/projets/import', {
+            method: 'POST',
+            body: JSON.stringify(data),
+          });
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsText(file);
+    });
+  }
+
   // === Pieces ===
   async getPieces(projetId?: string) {
     const pid = projetId || this.getProjetId();
@@ -614,6 +658,13 @@ class ApiClient {
   async updateUserSettings(data: Record<string, unknown>) {
     return this.request('/settings/user', {
       method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateUser(data: Record<string, unknown>) {
+    return this.request('/users/me', {
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
   }

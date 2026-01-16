@@ -28,6 +28,10 @@ router.get('/:projetId', validate(projetParamsSchema), checkProjetAccess, asyncH
 router.patch('/:projetId', validate(updateProjetSchema), checkProjetAccess, asyncHandler(projetController.update));
 router.delete('/:projetId', validate(projetParamsSchema), checkProjetAccess, asyncHandler(projetController.softDelete));
 
+// Export / Import
+router.get('/:projetId/export', validate(projetParamsSchema), checkProjetAccess, asyncHandler(projetController.exportProjet));
+router.post('/import', asyncHandler(projetController.importProjet));
+
 // Nested routes - tous avec checkProjetAccess
 router.use('/:projetId/pieces', validate(projetParamsSchema), checkProjetAccess, pieceRoutes);
 router.use('/:projetId/taches', validate(projetParamsSchema), checkProjetAccess, tacheRoutes);
