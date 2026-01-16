@@ -13,6 +13,10 @@ export interface IdeePinterest {
   moodboardIds?: string[];
   createdAt: string;
   updatedAt: string;
+  // Champs étendus pour le frontend
+  isFavorite?: boolean;
+  pieceName?: string;
+  aiExtracted?: boolean;
 }
 
 export interface CreateIdeeInput {
@@ -26,6 +30,12 @@ export interface CreateIdeeInput {
   style?: string;
   notes?: string;
 }
+
+export type CreateIdeePinterestInput = CreateIdeeInput;
+export type UpdateIdeePinterestInput = Partial<CreateIdeeInput> & {
+  moodboardIds?: string[];
+  isFavorite?: boolean;
+};
 
 export interface UpdateIdeeInput extends Partial<CreateIdeeInput> {
   moodboardIds?: string[];

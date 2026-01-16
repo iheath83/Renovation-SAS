@@ -1,25 +1,6 @@
 version: '3.8'
 
 services:
-  # Base de données PostgreSQL
-  postgres:
-    image: postgres:16-alpine
-    container_name: renovision-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-renovision}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-renovision_db}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-renovision} -d ${POSTGRES_DB:-renovision_db}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - renovision-network
-
   # Backend API
   backend:
     build:
@@ -30,7 +11,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      DATABASE_URL: postgresql://${POSTGRES_USER:-renovision}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-renovision_db}?schema=public
+      DATABASE_URL: ${DATABASE_URL}
       JWT_SECRET: ${JWT_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
       PINTEREST_API_KEY: ${PINTEREST_API_KEY:-}
@@ -38,9 +19,6 @@ services:
       POWENS_CLIENT_SECRET: ${POWENS_CLIENT_SECRET:-}
       POWENS_REDIRECT_URI: ${POWENS_REDIRECT_URI:-}
       CORS_ORIGIN: ${CORS_ORIGIN:-*}
-    depends_on:
-      postgres:
-        condition: service_healthy
     healthcheck:
       test:
         - CMD
@@ -77,8 +55,7 @@ services:
     container_name: renovision-frontend
     restart: unless-stopped
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:80/"]
       interval: 30s
@@ -100,7 +77,3 @@ services:
 networks:
   renovision-network:
     driver: bridge
-
-volumes:
-  postgres_data:
-    driver: local

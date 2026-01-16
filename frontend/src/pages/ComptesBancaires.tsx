@@ -101,10 +101,11 @@ export function ComptesBancaires() {
       const result = await syncMutation.mutateAsync(compteId);
       
       if (result.success) {
-        if (result.tokenExpired) {
+        const resultData = result as { tokenExpired?: boolean; count?: number; message?: string };
+        if (resultData.tokenExpired) {
           alert('⚠️ Token expiré ! Veuillez déconnecter et reconnecter ce compte.');
-        } else if (result.count && result.count > 0) {
-          alert(`✅ ${result.message}`);
+        } else if (resultData.count && resultData.count > 0) {
+          alert(`✅ ${resultData.message || 'Synchronisation réussie'}`);
         } else {
           alert('ℹ️ Aucune nouvelle transaction.\n\nPowens synchronise peut-être encore les données depuis votre banque.\n\nRéessayez dans 2-3 minutes.');
         }

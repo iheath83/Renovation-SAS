@@ -263,7 +263,7 @@ export function Dashboard() {
         id: `idea-${i.id}`,
         type: 'idea',
         action: 'Nouvelle inspiration',
-        item: i.titre,
+        item: i.titre || 'Idée sans titre',
         time: format(new Date(i.createdAt), "'Il y a' d 'jours'", { locale: fr }),
         metadata: 'Pinterest',
         date: new Date(i.createdAt),

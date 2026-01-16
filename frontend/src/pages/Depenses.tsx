@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Receipt, Search, CheckCircle2, Circle, Clock, ArrowRight, Wallet, Upload, Trash2, X } from 'lucide-react';
+import { Plus, Receipt, Search, CheckCircle2, Circle, Clock, Wallet, Upload, Trash2, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { DepenseListItem, DepenseModal, DepenseImportModal, type ImportedDepense } from '@/components/depenses';
 import { useDepenses, useCreateDepense, useUpdateDepense, useDeleteDepense, useDepensesStats } from '@/hooks/useDepenses';

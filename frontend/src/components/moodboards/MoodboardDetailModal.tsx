@@ -146,7 +146,7 @@ export function MoodboardDetailModal({
                           {idee.imageUrl ? (
                             <img
                               src={idee.imageUrl}
-                              alt={idee.titre}
+                              alt={idee.titre || 'Idée Pinterest'}
                               className="w-full h-full object-cover"
                             />
                           ) : (

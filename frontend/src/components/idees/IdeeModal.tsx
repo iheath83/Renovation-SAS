@@ -18,11 +18,11 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
   const [isExtracting, setIsExtracting] = useState(false);
   const [extractionError, setExtractionError] = useState<string | null>(null);
   const [extracted, setExtracted] = useState<{
-    titre: string;
-    description: string;
-    tags: string[];
-    couleurs: string[];
-    imageUrl: string;
+    titre?: string;
+    description?: string;
+    tags?: string[];
+    couleurs?: string[];
+    imageUrl?: string;
   } | null>(null);
   const [newTag, setNewTag] = useState('');
 
@@ -36,12 +36,13 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
       const response = await api.extractPinterestMetadata(url);
       
       if (response.success && response.data) {
+        const data = response.data as { titre?: string; description?: string; tags?: string[]; couleurs?: string[]; imageUrl?: string };
         setExtracted({
-          titre: response.data.titre,
-          description: response.data.description || '',
-          tags: response.data.tags || [],
-          couleurs: response.data.couleurs || [],
-          imageUrl: response.data.imageUrl,
+          titre: data.titre,
+          description: data.description || '',
+          tags: data.tags || [],
+          couleurs: data.couleurs || [],
+          imageUrl: data.imageUrl,
         });
       } else {
         setExtractionError(response.error?.message || 'Erreur lors de l\'extraction');
@@ -55,7 +56,7 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
   };
 
   const handleAddTag = () => {
-    if (newTag && extracted && !extracted.tags.includes(newTag)) {
+    if (newTag && extracted && extracted.tags && !extracted.tags.includes(newTag)) {
       setExtracted({
         ...extracted,
         tags: [...extracted.tags, newTag],
@@ -65,7 +66,7 @@ export function IdeeModal({ isOpen, onClose, onSave, isLoading }: IdeeModalProps
   };
 
   const handleRemoveTag = (tag: string) => {
-    if (extracted) {
+    if (extracted && extracted.tags) {
       setExtracted({
         ...extracted,
         tags: extracted.tags.filter(t => t !== tag),

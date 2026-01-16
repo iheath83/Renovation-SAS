@@ -57,7 +57,7 @@ export function Inspiration() {
       const searchLower = search.toLowerCase();
       filtered = filtered.filter(
         i =>
-          i.titre.toLowerCase().includes(searchLower) ||
+          (i.titre && i.titre.toLowerCase().includes(searchLower)) ||
           i.description?.toLowerCase().includes(searchLower) ||
           i.tags.some(t => t.toLowerCase().includes(searchLower)) ||
           i.pieceName?.toLowerCase().includes(searchLower)
@@ -305,7 +305,7 @@ export function Inspiration() {
                   key={idee.id}
                   idee={idee}
                   onClick={() => setSelectedIdee(idee)}
-                  onToggleFavorite={() => toggleFavorite.mutate(idee.id)}
+                  onToggleFavorite={() => toggleFavorite.mutate({ id: idee.id, isFavorite: !idee.isFavorite })}
                   onDelete={() => {
                     if (confirm('Supprimer cette inspiration ?')) {
                       deleteIdee.mutate(idee.id);
@@ -388,7 +388,7 @@ export function Inspiration() {
         idee={selectedIdee}
         onToggleFavorite={() => {
           if (selectedIdee) {
-            toggleFavorite.mutate(selectedIdee.id);
+            toggleFavorite.mutate({ id: selectedIdee.id, isFavorite: !selectedIdee.isFavorite });
           }
         }}
       />

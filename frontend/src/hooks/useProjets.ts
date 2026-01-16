@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
+import type { Projet } from '@/types/projet';
 
 export function useProjets() {
-  return useQuery({
+  return useQuery<Projet[]>({
     queryKey: ['projets'],
     queryFn: async () => {
       const result = await api.getProjets();

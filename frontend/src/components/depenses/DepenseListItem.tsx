@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle2, Circle, Store, MoreVertical, FileText, Clock } from 'lucide-react';
+import { MapPin, CheckCircle2, Store, MoreVertical, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Depense } from '@/types/depense';
 import { CATEGORIE_DEPENSE_ICONS, CATEGORIE_DEPENSE_LABELS } from '@/types/depense';

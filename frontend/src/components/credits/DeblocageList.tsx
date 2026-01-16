@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Calendar, FileText, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import type { Deblocage } from '@/types/credit';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';

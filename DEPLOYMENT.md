@@ -6,6 +6,7 @@ Configuration Docker Compose pour déployer RénoVision en production via Dokplo
 
 - Dokploy installé et configuré
 - Traefik configuré dans Dokploy
+- Base de données PostgreSQL créée dans Dokploy
 - Nom de domaine pointant vers votre serveur
 
 ## 🚀 Déploiement
@@ -24,10 +25,8 @@ Remplir les valeurs :
 # Domaine
 DOMAIN=votre-domaine.com
 
-# Base de données
-POSTGRES_USER=renovision
-POSTGRES_PASSWORD=mot_de_passe_securise
-POSTGRES_DB=renovision_db
+# Base de données (fournie par Dokploy)
+DATABASE_URL=postgresql://user:password@postgres-host:5432/database_name?schema=public
 
 # JWT Secrets (générer avec: openssl rand -base64 32)
 JWT_SECRET=secret_jwt_tres_securise
@@ -81,10 +80,10 @@ docker-compose logs -f postgres
     │  :80    │                        │ :3000   │
     └─────────┘                        └────┬────┘
                                             │
+                                            │ DATABASE_URL
                                             │
                                        ┌────▼────┐
-                                       │Postgres │
-                                       │  :5432  │
+                                       │Postgres │ (Dokploy)
                                        └─────────┘
 ```
 
@@ -104,10 +103,8 @@ docker-compose logs -f postgres
 - **Migrations** : Automatiques au démarrage via Prisma
 
 ### PostgreSQL
-- **Image** : postgres:16-alpine
-- **Port** : 5432 (interne uniquement)
-- **Volume** : `postgres_data`
-- **Healthcheck** : `pg_isready`
+- **Géré par** : Dokploy
+- **Connexion** : Via `DATABASE_URL` fournie par Dokploy
 
 ## 🔍 Points importants
 
@@ -133,8 +130,8 @@ Géré automatiquement par Traefik via Let's Encrypt (configuré dans Dokploy).
 # Arrêter les services
 docker-compose down
 
-# Arrêter et supprimer les volumes
-docker-compose down -v
+# Arrêter les services
+docker-compose down
 
 # Reconstruire les images
 docker-compose build
@@ -148,7 +145,6 @@ docker-compose logs -f
 # Accéder au shell d'un conteneur
 docker-compose exec backend sh
 docker-compose exec frontend sh
-docker-compose exec postgres psql -U renovision -d renovision_db
 
 # Exécuter les migrations manuellement
 docker-compose exec backend npx prisma migrate deploy
@@ -162,7 +158,7 @@ docker-compose ps
 - ✅ Helmet.js activé pour le backend
 - ✅ CORS configuré
 - ✅ Secrets JWT sécurisés
-- ✅ Base de données isolée (réseau interne uniquement)
+- ✅ Base de données gérée par Dokploy
 - ✅ HTTPS via Let's Encrypt (Traefik)
 - ✅ Healthchecks pour tous les services
 
@@ -206,15 +202,26 @@ docker-compose config
 
 ### La base de données ne répond pas
 ```bash
-docker-compose logs postgres
-# Recréer le volume si nécessaire
-docker-compose down -v
-docker-compose up -d
+# Vérifier la DATABASE_URL dans Dokploy
+# Tester la connexion depuis le backend
+docker-compose exec backend sh
+# Puis dans le conteneur :
+# npx prisma db push
 ```
 
 ## 📝 Notes
 
 - Le fichier `.env` ne doit jamais être commité
-- Les volumes Docker persistent les données entre les redémarrages
+- La base de données PostgreSQL est gérée directement par Dokploy
+- Récupérer la `DATABASE_URL` depuis l'interface Dokploy
 - Traefik gère automatiquement le renouvellement des certificats SSL
 - Le middleware `stripprefix` retire `/api` avant de transmettre au backend
+
+## 🗄️ Configuration de la base de données dans Dokploy
+
+1. Créer une base de données PostgreSQL dans Dokploy
+2. Récupérer l'URL de connexion fournie par Dokploy
+3. L'ajouter dans les variables d'environnement de votre projet :
+   ```
+   DATABASE_URL=postgresql://user:password@host:5432/database?schema=public
+   ```

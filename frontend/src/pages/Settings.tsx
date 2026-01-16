@@ -448,7 +448,7 @@ function ProjetSection() {
       }
     } catch (error) {
       console.error('Error updating project:', error);
-      setSaveError(error.message || 'Erreur de connexion');
+      setSaveError((error as Error).message || 'Erreur de connexion');
     } finally {
       setIsSaving(false);
     }
@@ -485,14 +485,14 @@ function ProjetSection() {
     
     try {
       const result = await api.importProjet(file);
-      if (result.success) {
+      if (result && typeof result === 'object' && 'success' in result && result.success) {
         setSaveSuccess(true);
         await refetch();
         setTimeout(() => setSaveSuccess(false), 3000);
         // Recharger pour afficher le nouveau projet
         setTimeout(() => window.location.reload(), 1000);
       } else {
-        setSaveError(result.error?.message || 'Erreur lors de l\'import');
+        setSaveError((result && typeof result === 'object' && 'error' in result && result.error && typeof result.error === 'object' && 'message' in result.error) ? String(result.error.message) : 'Erreur lors de l\'import');
       }
     } catch (error) {
       console.error('Import error:', error);
@@ -637,10 +637,14 @@ function ProjetSection() {
               id="import-file"
             />
             <label htmlFor="import-file">
-              <Button as="span" disabled={isImporting}>
+              <span className={cn(
+                "inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all",
+                "bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-600/30",
+                isImporting && "opacity-50 cursor-not-allowed"
+              )}>
                 <Upload className="w-4 h-4" />
                 {isImporting ? 'Import en cours...' : 'Importer un projet'}
-              </Button>
+              </span>
             </label>
           </div>
         </div>

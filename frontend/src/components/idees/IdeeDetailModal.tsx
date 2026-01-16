@@ -40,7 +40,7 @@ export function IdeeDetailModal({ isOpen, onClose, idee, onToggleFavorite }: Ide
                 {idee.imageUrl ? (
                   <img
                     src={idee.imageUrl}
-                    alt={idee.titre}
+                    alt={idee.titre || 'Idée Pinterest'}
                     className="w-full h-64 lg:h-full object-cover"
                   />
                 ) : (
@@ -111,20 +111,22 @@ export function IdeeDetailModal({ isOpen, onClose, idee, onToggleFavorite }: Ide
                   )}
 
                   {/* Color palette */}
-                  <div>
-                    <h3 className="text-sm font-medium text-tertiary mb-3">Palette de couleurs</h3>
-                    <div className="flex items-center gap-3">
-                      {idee.couleurs.map((color, i) => (
-                        <div key={i} className="text-center">
-                          <div
-                            className="w-14 h-14 rounded-xl border-2 border-primary shadow-lg mb-1"
-                            style={{ backgroundColor: color }}
-                          />
-                          <span className="text-xs text-muted">{color}</span>
-                        </div>
-                      ))}
+                  {idee.couleurs && Array.isArray(idee.couleurs) && idee.couleurs.length > 0 && (
+                    <div>
+                      <h3 className="text-sm font-medium text-tertiary mb-3">Palette de couleurs</h3>
+                      <div className="flex items-center gap-3">
+                        {idee.couleurs.map((color: string, i: number) => (
+                          <div key={i} className="text-center">
+                            <div
+                              className="w-14 h-14 rounded-xl border-2 border-primary shadow-lg mb-1"
+                              style={{ backgroundColor: color }}
+                            />
+                            <span className="text-xs text-muted">{color}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Tags */}
                   <div>

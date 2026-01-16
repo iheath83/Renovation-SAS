@@ -20,6 +20,7 @@ export interface CreateMoodboardInput {
   materiauIds?: string[];
   palette?: string[];
   coverImage?: string;
+  [key: string]: unknown; // Index signature pour Record<string, unknown>
 }
 
 export interface UpdateMoodboardInput extends Partial<CreateMoodboardInput> {}

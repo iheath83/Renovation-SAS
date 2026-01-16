@@ -11,6 +11,8 @@ interface ApiResponse<T> {
 }
 
 class ApiClient {
+  private baseURL = API_URL;
+  
   // Toujours lire depuis le localStorage pour éviter la désynchronisation
   private get accessToken(): string | null {
     return typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
@@ -18,6 +20,10 @@ class ApiClient {
 
   private get refreshToken(): string | null {
     return typeof window !== 'undefined' ? localStorage.getItem('refreshToken') : null;
+  }
+  
+  private getAccessToken(): string | null {
+    return this.accessToken;
   }
 
   setTokens(accessToken: string, refreshToken: string) {

@@ -26,7 +26,7 @@ export function IdeeCard({ idee, onToggleFavorite, onDelete, onClick }: IdeeCard
         {idee.imageUrl ? (
           <img
             src={idee.imageUrl}
-            alt={idee.titre}
+            alt={idee.titre || 'Idée Pinterest'}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
@@ -84,7 +84,7 @@ export function IdeeCard({ idee, onToggleFavorite, onDelete, onClick }: IdeeCard
 
         {/* Color palette */}
         <div className="absolute bottom-16 left-3 right-3 flex items-center gap-1">
-          {idee.couleurs.slice(0, 5).map((color, i) => (
+          {idee.couleurs && Array.isArray(idee.couleurs) && idee.couleurs.slice(0, 5).map((color: string, i: number) => (
             <div
               key={i}
               className="w-6 h-6 rounded-full border-2 border-white/30 shadow-lg"
