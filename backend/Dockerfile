@@ -8,6 +8,7 @@ WORKDIR /app
 
 # Copier les fichiers de dépendances
 COPY package*.json ./
+COPY prisma.config.ts ./
 COPY prisma ./prisma/
 
 # Installation des dépendances en production
