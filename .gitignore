@@ -39,3 +39,4 @@ build/
 
 # Agent OS
 .agent-os/
+.history/
