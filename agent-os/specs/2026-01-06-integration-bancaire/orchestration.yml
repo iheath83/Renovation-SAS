@@ -1,0 +1,32 @@
+task_groups:
+  - name: Setup Bridge API & Backend Configuration
+    standards:
+      - all
+  - name: Modèle de données (CompteBancaire, TransactionBancaire)
+    standards:
+      - all
+  - name: Service Backend Bridge & Webhooks
+    standards:
+      - all
+  - name: API Routes Comptes Bancaires
+    standards:
+      - all
+  - name: API Routes Transactions Bancaires
+    standards:
+      - all
+  - name: Logique de Catégorisation Intelligente
+    standards:
+      - all
+  - name: Frontend Hooks & API Client
+    standards:
+      - all
+  - name: Page Connexion Bancaire
+    standards:
+      - all
+  - name: Page Transactions & Modal Conversion
+    standards:
+      - all
+  - name: Integration Dashboard & Notifications
+    standards:
+      - all
+

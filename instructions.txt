@@ -1,0 +1,161 @@
+📋 DOCUMENTATION TECHNIQUE - RénoVision
+🛠 Stack Technique
+Frontend:
+
+React 18.2.0 + JSX
+Tailwind CSS (design glassmorphism)
+shadcn/ui (Radix UI components)
+Lucide React (icônes)
+Framer Motion (animations)
+React Router DOM v7
+React Query v5 (gestion d'état)
+React Hook Form
+Recharts (graphiques)
+@hello-pangea/dnd (drag & drop)
+date-fns (dates)
+Backend:
+
+Backend : Node.js + Express (ou Fastify)
+BDD : PostgreSQL + Prisma
+Auth : Passport.js ou Clerk
+Storage : AWS S3 / Cloudinary
+Hosting : Railway, Render, Fly.io
+Queue : BullMQ (pour jobs async)
+
+🗄️ Modèle de Données
+8 Entités Principales
+Piece (Pièces) - Zones de rénovation avec budget, statut, étage, type, surface
+Tache (Tâches) - Gestion Kanban avec dépendances, sous-tâches, deadlines, coûts
+Materiau (Matériaux) - Catalogue avec prix, quantités, références, fournisseurs
+Depense (Dépenses) - Suivi financier avec factures, catégories, associations
+Credit (Crédits) - Crédits travaux avec montant total et banque
+Deblocage (Déblocages) - Versements de crédit avec justificatifs
+IdeePinterest (Idées) - Inspirations avec extraction IA de métadonnées
+Moodboard (Planches) - Collections visuelles avec palettes de couleurs
+User (Extension) - Budget max projet persistant
+📱 10 Modules Fonctionnels
+1. 🏠 Dashboard
+KPIs budgétaires et progression
+Graphique budget par pièce (Recharts)
+Alertes tâches en retard
+Activité récente
+2. 🏘️ Pièces
+Grid/List view avec recherche
+Filtres type/étage
+Upload images
+Progression budgétaire visuelle
+Tags personnalisés
+3. ✅ Tâches
+Vue Kanban drag & drop
+Gestion dépendances (prérequis)
+Sous-tâches avec checkboxes
+Coûts estimés/réels
+Pourcentage de complétion
+4. 📅 Gantt
+Timeline des tâches
+Navigation par mois
+Calcul durées automatique
+Indicateurs dépendances
+Barres colorées par statut
+5. 🎨 Matériaux
+Catalogue visuel
+Catégorisation (8 catégories)
+Prix × Quantité = Coût total
+Liens marchands
+6 unités différentes (m², m, pièce, litre, kg, lot)
+6. 💡 Idées Pinterest
+Collection d'inspirations
+Extraction IA de métadonnées (LLM)
+Tags et notes
+Liens externes
+7. 🎭 Moodboards
+Planches d'inspiration
+Palettes de couleurs
+Association matériaux/pièces
+8. 💰 Dépenses
+Liste dépenses réelles payées
+Multi-upload factures
+Statistiques (total, nombre, moyenne)
+Indicateur "passé dans crédit"
+Recherche et filtrage
+9. 📊 Budget & Suivi
+Budget max projet (persistant en base User)
+Projection totale: Payé + Prévu
+Dépenses futures prévues (création/édition/conversion)
+Graphique pie par catégorie
+Budget par pièce avec progression
+Variance et alertes dépassement
+10. 🏦 Crédits Travaux
+Gestion multi-crédits
+Déblocages successifs avec justificatifs
+Progression visuelle (% débloqué)
+Historique complet
+🎨 Design System
+Glassmorphism:
+
+backdrop-filter: blur(20px)
+Background semi-transparent
+Borders subtils
+Shadows profonds
+Palette:
+
+Gradients Purple/Blue/Pink/Cyan
+Dark mode (#1a202c → #2d3748)
+Animations blob en fond
+Components UI:
+
+shadcn/ui (accessibles via Radix)
+Responsive mobile-first
+Animations Framer Motion
+🔐 Sécurité & Auth
+Authentification Base44 (auto-gérée)
+Rôles: admin/user
+base44.auth.me() / updateMe()
+Permissions sur entité User
+🚀 Fonctionnalités Avancées
+IA: Extraction métadonnées Pinterest via LLM
+Drag & Drop: Kanban avec @hello-pangea/dnd
+Calculs auto: Budget, coûts, progressions, variances
+React Query: Cache optimisé, invalidation intelligente
+Upload multi-fichiers: Factures, justificatifs, images
+Recherche temps réel: Filtrage combiné sur toutes les vues
+📦 Architecture
+pages/
+  - Dashboard.js (tableau de bord)
+  - Pieces.js (gestion pièces)
+  - Taches.js (Kanban)
+  - Gantt.js (timeline)
+  - Materiaux.js (catalogue)
+  - Idees.js (Pinterest)
+  - Moodboards.js (planches)
+  - Depenses.js (dépenses réelles)
+  - Budget.js (budget & prévisions)
+  - Credits.js (crédits travaux)
+
+components/
+  - dashboard/ (StatCard, BudgetChart, RecentActivity)
+  - pieces/ (PieceCard, PieceForm)
+  - taches/ (TacheForm)
+  - materiaux/ (MateriauForm)
+  - idees/ (IdeeForm)
+  - depenses/ (DepenseForm)
+
+entities/
+  - Piece.json, Tache.json, Materiau.json
+  - Depense.json, Credit.json, Deblocage.json
+  - IdeePinterest.json, Moodboard.json
+  - User.json (extension avec budget_max_projet)
+
+Layout.js (navigation glassmorphique)
+🎯 Points Clés
+✅ Application complète de gestion de rénovation
+✅ 10 modules interconnectés
+✅ 8 entités relationnelles
+✅ Design moderne glassmorphism
+✅ Responsive & accessible
+✅ IA intégrée (extraction métadonnées)
+✅ Gestion financière avancée (budget, dépenses, crédits)
+✅ Planification (Kanban, Gantt, dépendances)
+✅ Inspiration visuelle (idées, moodboards)
+✅ Multi-upload de fichiers
+
