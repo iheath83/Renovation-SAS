@@ -12,11 +12,16 @@ import {
   X,
   Settings,
   LogOut,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { api } from '@/lib/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import logoBlack from '@/assets/logo_black.svg';
+import logoWhite from '@/assets/logo_white.svg';
 
 interface NavbarProps {
   isMobileMenuOpen: boolean;
@@ -43,6 +48,7 @@ export function Navbar({ isMobileMenuOpen, onToggleMobileMenu }: NavbarProps) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [user, setUser] = useState<User | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -69,12 +75,11 @@ export function Navbar({ isMobileMenuOpen, onToggleMobileMenu }: NavbarProps) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-600/30">
-                <span className="text-white font-bold text-lg">R</span>
-              </div>
-              <span className="font-display font-semibold text-lg text-primary hidden sm:block">
-                RénoVision
-              </span>
+              <img 
+                src={theme === 'dark' ? logoWhite : logoBlack}
+                alt="RénoPilot"
+                className="h-10 w-auto"
+              />
             </div>
 
             {/* Desktop Navigation */}
@@ -124,6 +129,19 @@ export function Navbar({ isMobileMenuOpen, onToggleMobileMenu }: NavbarProps) {
                   <p className="text-xs text-muted">{user?.email}</p>
                 </div>
               </div>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg hover:bg-overlay text-tertiary hover:text-primary transition-colors"
+                aria-label="Changer de thème"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
 
               {/* Settings */}
               <NavLink
