@@ -183,7 +183,7 @@ export function Login({ onSuccess }: LoginProps) {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="gap-2 text-lg px-8 py-6"
+                  className="gap-2 text-lg px-8 py-6 border-white/20 text-white hover:bg-white/10"
                 >
                   Créer un compte
                 </Button>
