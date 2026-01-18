@@ -14,8 +14,9 @@ import {
   LayoutDashboard,
   TrendingUp,
   Calendar,
-  FileText,
   ArrowRight,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
@@ -77,6 +78,7 @@ const stats = [
 export function Login({ onSuccess }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -296,86 +298,109 @@ export function Login({ onSuccess }: LoginProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-slate-800/95 backdrop-blur-lg border border-slate-700/50 rounded-2xl p-8 w-full max-w-md shadow-2xl"
+            className="bg-slate-800/95 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-10 w-full max-w-md shadow-2xl"
           >
             {/* Logo */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 mb-4"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                className="flex justify-center mb-6"
               >
-                <LogIn className="w-8 h-8 text-white" />
+                <img 
+                  src={logoWhite}
+                  alt="RénoPilot"
+                  className="h-16 w-auto"
+                />
               </motion.div>
-              <h2 className="text-2xl font-display font-bold text-white">
+              <h2 className="text-3xl font-display font-bold text-white mb-2">
                 Connexion
               </h2>
-              <p className="text-gray-400 mt-1">
-                Accédez à votre espace
+              <p className="text-gray-400">
+                Accédez à votre espace de gestion
               </p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400"
+                  className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30"
                 >
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                  <span className="text-sm">{error}</span>
+                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-red-400 leading-relaxed">{error}</span>
                 </motion.div>
               )}
 
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
-                <Input
-                  type="email"
-                  placeholder="Adresse email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-11 bg-slate-900/50 border-slate-700 text-white placeholder:text-gray-500"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
-                  <Input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-11 bg-slate-900/50 border-slate-700 text-white placeholder:text-gray-500"
-                    required
-                  />
+              <div className="space-y-5">
+                {/* Email */}
+                <div className="group">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Adresse email
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
+                    <Input
+                      type="email"
+                      placeholder="jean@exemple.fr"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="text-right">
-                  <Link
-                    to="/forgot-password"
-                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Mot de passe oublié ?
-                  </Link>
+
+                {/* Mot de passe */}
+                <div className="group">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-300">
+                      Mot de passe
+                    </label>
+                    <Link
+                      to="/forgot-password"
+                      className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      Mot de passe oublié ?
+                    </Link>
+                  </div>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="pl-12 pr-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </div>
               </div>
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full h-14 text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-500/25"
                 disabled={isLoading || !email || !password}
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Connexion...
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Connexion en cours...
                   </>
                 ) : (
                   <>
-                    <LogIn className="w-4 h-4" />
+                    <LogIn className="w-5 h-5" />
                     Se connecter
                   </>
                 )}
@@ -383,11 +408,11 @@ export function Login({ onSuccess }: LoginProps) {
             </form>
 
             {/* Register link */}
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-400">
+            <div className="mt-8 text-center">
+              <p className="text-gray-400">
                 Pas encore de compte ?{' '}
-                <Link to="/register" className="text-blue-400 hover:text-blue-300 transition-colors">
-                  S'inscrire
+                <Link to="/register" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                  Créer un compte
                 </Link>
               </p>
             </div>
