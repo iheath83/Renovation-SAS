@@ -253,7 +253,7 @@ export const me = async (req, res) => {
     return res.status(404).json(errorResponse('Utilisateur non trouvé', 'NOT_FOUND'));
   }
 
-  res.json(successResponse({ user: excludePassword(user) }));
+  res.json(successResponse(excludePassword(user)));
 };
 
 export const changePassword = async (req, res) => {

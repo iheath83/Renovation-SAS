@@ -229,7 +229,6 @@ export const importProjet = async (req, res) => {
             nom: cat.nom,
             icon: cat.icon,
             color: cat.color,
-            isDefault: cat.isDefault,
           })),
         },
         // Créer les pièces
@@ -240,10 +239,12 @@ export const importProjet = async (req, res) => {
             surface: piece.surface,
             etage: piece.etage,
             statut: piece.statut,
-            notes: piece.notes,
+            budget: piece.budget,
+            images: piece.images,
+            tags: piece.tags || [],
           })),
         },
-        // Créer les matériaux
+        // Créer les matériaux (sans association aux pièces pour l'instant)
         materiaux: {
           create: (importData.materiaux || []).map(mat => ({
             name: mat.name,
@@ -252,23 +253,43 @@ export const importProjet = async (req, res) => {
             unite: mat.unite,
             prixUnitaire: mat.prixUnitaire,
             fournisseur: mat.fournisseur,
-            statut: mat.statut,
+            reference: mat.reference,
+            lienMarchand: mat.lienMarchand,
+            image: mat.image,
             notes: mat.notes,
-            pieceId: null, // Les liens de pièces seront recréés après
           })),
         },
-        // Créer les dépenses
+        // Créer les dépenses (sans association aux pièces)
         depenses: {
           create: (importData.depenses || []).map(dep => ({
             description: dep.description,
             montant: dep.montant,
             categorie: dep.categorie,
-            date: dep.date ? new Date(dep.date) : new Date(),
+            dateDepense: dep.dateDepense ? new Date(dep.dateDepense) : new Date(),
             fournisseur: dep.fournisseur,
-            modePaiement: dep.modePaiement,
-            statut: dep.statut,
-            facture: dep.facture,
-            pieceId: null,
+            factures: dep.factures,
+            passeDansCredit: dep.passeDansCredit || false,
+            estPrevue: dep.estPrevue || false,
+          })),
+        },
+        // Créer les tâches
+        taches: {
+          create: (importData.taches || []).map(tache => ({
+            title: tache.title,
+            description: tache.description,
+            statut: tache.statut,
+            priorite: tache.priorite,
+            dateDebut: tache.dateDebut ? new Date(tache.dateDebut) : null,
+            dateFin: tache.dateFin ? new Date(tache.dateFin) : null,
+            coutEstime: tache.coutEstime,
+            coutReel: tache.coutReel,
+            sousTaches: {
+              create: (tache.sousTaches || []).map(st => ({
+                title: st.title,
+                completed: st.completed || false,
+                ordre: st.ordre || 0,
+              })),
+            },
           })),
         },
         // Créer les crédits avec déblocages
@@ -293,6 +314,23 @@ export const importProjet = async (req, res) => {
         },
         // Créer les idées Pinterest
         ideesPinterest: {
+          create: (importData.ideesPinterest || []).map(idee => ({
+            url: idee.url,
+            title: idee.title,
+            description: idee.description,
+            imageUrl: idee.imageUrl,
+            tags: idee.tags || [],
+          })),
+        },
+        // Créer les moodboards
+        moodboards: {
+          create: (importData.moodboards || []).map(mb => ({
+            title: mb.title,
+            description: mb.description,
+          })),
+        },
+      },
+    });
           create: (importData.ideesPinterest || []).map(idee => ({
             titre: idee.titre,
             description: idee.description,
