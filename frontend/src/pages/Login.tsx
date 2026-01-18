@@ -103,20 +103,20 @@ export function Login({ onSuccess }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-surface-950 via-surface-900 to-surface-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.1 }}
           transition={{ duration: 2, ease: 'easeOut' }}
-          className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] rounded-full bg-primary-500 blur-[150px]"
+          className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] rounded-full bg-blue-500 blur-[150px]"
         />
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.08 }}
           transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
-          className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-accent-500 blur-[150px]"
+          className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-purple-500 blur-[150px]"
         />
       </div>
 
@@ -125,14 +125,14 @@ export function Login({ onSuccess }: LoginProps) {
         <header className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <img 
-              src={theme === 'dark' ? logoWhite : logoBlack}
+              src={logoWhite}
               alt="RénoPilot"
               className="h-12 w-auto"
             />
             <Button
               variant="outline"
               onClick={() => setShowLoginForm(true)}
-              className="gap-2"
+              className="gap-2 border-white/20 text-white hover:bg-white/10"
             >
               <LogIn className="w-4 h-4" />
               Se connecter
@@ -152,21 +152,21 @@ export function Login({ onSuccess }: LoginProps) {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8"
             >
-              <TrendingUp className="w-4 h-4 text-primary-400" />
-              <span className="text-sm text-primary-400 font-medium">L'outil tout-en-un pour vos rénovations</span>
+              <TrendingUp className="w-4 h-4 text-blue-400" />
+              <span className="text-sm text-blue-400 font-medium">L'outil tout-en-un pour vos rénovations</span>
             </motion.div>
 
-            <h1 className="text-5xl lg:text-7xl font-display font-bold text-primary mb-6">
+            <h1 className="text-5xl lg:text-7xl font-display font-bold text-white mb-6">
               Pilotez votre projet
               <br />
-              <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 de rénovation
               </span>
             </h1>
 
-            <p className="text-xl text-tertiary mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Gérez facilement votre budget, vos tâches, vos matériaux et inspirez-vous pour créer la maison de vos rêves.
             </p>
 
@@ -200,8 +200,8 @@ export function Login({ onSuccess }: LoginProps) {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm text-tertiary">{stat.label}</div>
+                  <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
+                  <div className="text-sm text-gray-400">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -217,10 +217,10 @@ export function Login({ onSuccess }: LoginProps) {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary mb-4">
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mb-4">
               Tout ce dont vous avez besoin
             </h2>
-            <p className="text-xl text-tertiary max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Une suite complète d'outils pour gérer chaque aspect de votre projet de rénovation
             </p>
           </motion.div>
@@ -233,15 +233,15 @@ export function Login({ onSuccess }: LoginProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-dark rounded-2xl p-8 hover:border-primary-500/50 transition-all duration-300 hover:scale-105"
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:scale-105"
               >
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}>
                   <feature.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-primary mb-3">
+                <h3 className="text-xl font-semibold text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-tertiary leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -256,13 +256,13 @@ export function Login({ onSuccess }: LoginProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="glass-dark rounded-3xl p-12 lg:p-16 text-center"
+            className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-12 lg:p-16 text-center"
           >
-            <Calendar className="w-16 h-16 mx-auto mb-6 text-primary-400" />
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary mb-4">
+            <Calendar className="w-16 h-16 mx-auto mb-6 text-blue-400" />
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-4">
               Prêt à démarrer votre projet ?
             </h2>
-            <p className="text-xl text-tertiary mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Rejoignez des milliers de propriétaires qui gèrent leur rénovation en toute sérénité
             </p>
             <Button
@@ -277,7 +277,7 @@ export function Login({ onSuccess }: LoginProps) {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-4 py-8 text-center text-tertiary text-sm border-t border-subtle">
+        <footer className="container mx-auto px-4 py-8 text-center text-gray-400 text-sm border-t border-slate-800">
           <p>© 2026 RénoPilot. Tous droits réservés.</p>
         </footer>
       </div>
@@ -296,7 +296,7 @@ export function Login({ onSuccess }: LoginProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="glass-dark rounded-2xl p-8 w-full max-w-md"
+            className="bg-slate-800/95 backdrop-blur-lg border border-slate-700/50 rounded-2xl p-8 w-full max-w-md shadow-2xl"
           >
             {/* Logo */}
             <div className="text-center mb-8">
@@ -304,14 +304,14 @@ export function Login({ onSuccess }: LoginProps) {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 mb-4"
+                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 mb-4"
               >
                 <LogIn className="w-8 h-8 text-white" />
               </motion.div>
-              <h2 className="text-2xl font-display font-bold text-primary">
+              <h2 className="text-2xl font-display font-bold text-white">
                 Connexion
               </h2>
-              <p className="text-tertiary mt-1">
+              <p className="text-gray-400 mt-1">
                 Accédez à votre espace
               </p>
             </div>
@@ -330,33 +330,33 @@ export function Login({ onSuccess }: LoginProps) {
               )}
 
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted z-10" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
                 <Input
                   type="email"
                   placeholder="Adresse email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-11"
+                  className="pl-11 bg-slate-900/50 border-slate-700 text-white placeholder:text-gray-500"
                   required
                 />
               </div>
 
               <div className="space-y-2">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted z-10" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
                   <Input
                     type="password"
                     placeholder="Mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-11"
+                    className="pl-11 bg-slate-900/50 border-slate-700 text-white placeholder:text-gray-500"
                     required
                   />
                 </div>
                 <div className="text-right">
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-primary-400 hover:text-primary-300 transition-colors"
+                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
                   >
                     Mot de passe oublié ?
                   </Link>
@@ -384,9 +384,9 @@ export function Login({ onSuccess }: LoginProps) {
 
             {/* Register link */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-tertiary">
+              <p className="text-sm text-gray-400">
                 Pas encore de compte ?{' '}
-                <Link to="/register" className="text-primary-400 hover:text-primary-300 transition-colors">
+                <Link to="/register" className="text-blue-400 hover:text-blue-300 transition-colors">
                   S'inscrire
                 </Link>
               </p>
