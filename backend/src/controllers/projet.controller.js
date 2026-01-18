@@ -112,7 +112,11 @@ export const exportProjet = async (req, res) => {
         where: { deletedAt: null },
         include: {
           taches: { where: { deletedAt: null } },
-          materiaux: { where: { deletedAt: null } },
+          materiaux: {
+            include: {
+              materiau: true
+            }
+          },
           depenses: { where: { deletedAt: null } },
         },
       },
@@ -157,7 +161,6 @@ export const exportProjet = async (req, res) => {
         projetId,
         deletedAt: null,
       },
-      deletedAt: null,
     },
   });
 

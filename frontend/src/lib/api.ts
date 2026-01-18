@@ -217,9 +217,9 @@ class ApiClient {
     const pid = projetId || this.getProjetId();
     if (!pid) throw new Error('Projet ID required');
     
-    const response = await fetch(`${this.baseURL}/projets/${pid}/export`, {
+    const response = await fetch(`${API_URL}/projets/${pid}/export`, {
       headers: {
-        'Authorization': `Bearer ${this.getAccessToken()}`,
+        'Authorization': `Bearer ${this.accessToken}`,
       },
     });
     
