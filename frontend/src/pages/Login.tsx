@@ -275,12 +275,6 @@ export function Login({ onSuccess }: LoginProps) {
     },
   ];
 
-  const trustedBy = [
-    { name: 'Artisans', count: '500+' },
-    { name: 'Particuliers', count: '2000+' },
-    { name: 'Entreprises', count: '100+' },
-  ];
-
   const benefits = [
     {
       icon: Zap,
@@ -338,27 +332,6 @@ export function Login({ onSuccess }: LoginProps) {
     },
   ];
 
-  const testimonials = [
-    {
-      name: 'Sophie Martin',
-      role: 'Propriétaire',
-      image: '👩',
-      text: 'RénoVision a transformé ma rénovation chaotique en un projet organisé. Le suivi budgétaire m\'a permis d\'économiser 15% !'
-    },
-    {
-      name: 'Thomas Dubois',
-      role: 'Artisan',
-      image: '👨',
-      text: 'En tant qu\'artisan, je recommande RénoVision à tous mes clients. La collaboration est tellement plus fluide !'
-    },
-    {
-      name: 'Marie Leroy',
-      role: 'Architecte d\'intérieur',
-      image: '👩‍💼',
-      text: 'Les moodboards et l\'intégration Pinterest sont parfaits pour présenter mes concepts clients. Un gain de temps énorme.'
-    },
-  ];
-
   const pricingPlans = [
     {
       name: 'Starter',
@@ -410,13 +383,6 @@ export function Login({ onSuccess }: LoginProps) {
     },
   ];
 
-  const stats = [
-    { value: '2500+', label: 'Projets réalisés' },
-    { value: '€12M+', label: 'Budget géré' },
-    { value: '98%', label: 'Satisfaction' },
-    { value: '24/7', label: 'Support disponible' },
-  ];
-
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
@@ -428,7 +394,6 @@ export function Login({ onSuccess }: LoginProps) {
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Fonctionnalités</a>
             <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Tarifs</a>
-            <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">Témoignages</a>
           </nav>
           <div className="flex items-center space-x-4">
             <Button 
@@ -521,47 +486,6 @@ export function Login({ onSuccess }: LoginProps) {
               Voir la démo
             </Button>
           </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-                  {stat.value}
-                </div>
-                <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-12 border-y border-gray-200 bg-gray-50/50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <p className="text-gray-500 text-sm uppercase tracking-wider">Ils nous font confiance</p>
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-12">
-            {trustedBy.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl font-bold text-gray-900">{item.count}</div>
-                <div className="text-gray-500 text-sm">{item.name}</div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -779,49 +703,6 @@ export function Login({ onSuccess }: LoginProps) {
                 >
                   {plan.cta}
                 </Button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
-            >
-              Ce que nos clients <span className="text-purple-700">disent de nous</span>
-            </motion.h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/50 border border-gray-300 rounded-2xl p-8"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="text-4xl">{testimonial.image}</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-gray-500">{testimonial.role}</div>
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>
