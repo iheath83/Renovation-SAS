@@ -295,19 +295,17 @@ export const importProjet = async (req, res) => {
         // Créer les crédits avec déblocages
         credits: {
           create: (importData.credits || []).map(credit => ({
-            nom: credit.nom,
-            organisme: credit.organisme,
-            montantTotal: credit.montantTotal,
-            tauxInteret: credit.tauxInteret,
-            dureeRemboursement: credit.dureeRemboursement,
-            mensualite: credit.mensualite,
-            dateDebut: credit.dateDebut ? new Date(credit.dateDebut) : null,
-            statut: credit.statut,
+            banque: credit.banque || credit.organisme || 'Banque inconnue',
+            montantTotal: credit.montantTotal || 0,
+            tauxInteret: credit.tauxInteret || null,
+            duree: credit.duree || credit.dureeRemboursement || null,
+            notes: credit.notes || credit.description || null,
             deblocages: {
               create: (credit.deblocages || []).map(deb => ({
                 montant: deb.montant,
-                date: deb.date ? new Date(deb.date) : new Date(),
-                description: deb.description,
+                dateDeblocage: deb.date || deb.dateDeblocage ? new Date(deb.date || deb.dateDeblocage) : new Date(),
+                notes: deb.description || deb.notes || null,
+                justificatifs: deb.justificatifs || null,
               })),
             },
           })),
