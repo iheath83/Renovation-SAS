@@ -386,29 +386,62 @@ export function Login({ onSuccess }: LoginProps) {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gray-50/80 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center">
-            <LogoBlack className="h-10 w-auto" />
-          </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Fonctionnalités</a>
-            <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Tarifs</a>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              onClick={() => { setShowLoginModal(true); setIsRegister(false); }}
-              className="text-gray-600 hover:text-gray-900"
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200/60 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center"
             >
-              Se connecter
-            </Button>
-            <Button 
-              onClick={() => { setShowLoginModal(true); setIsRegister(true); }}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              <LogoBlack className="h-12 w-auto" />
+            </motion.div>
+
+            {/* Navigation */}
+            <motion.nav
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="hidden md:flex items-center space-x-1"
             >
-              Commencer
-            </Button>
+              <a 
+                href="#features" 
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50"
+              >
+                Fonctionnalités
+              </a>
+              <a 
+                href="#pricing" 
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50"
+              >
+                Tarifs
+              </a>
+            </motion.nav>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex items-center gap-3"
+            >
+              <Button 
+                variant="ghost" 
+                onClick={() => { setShowLoginModal(true); setIsRegister(false); }}
+                className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 font-medium"
+              >
+                Se connecter
+              </Button>
+              <Button 
+                onClick={() => { setShowLoginModal(true); setIsRegister(true); }}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all"
+              >
+                Commencer
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </motion.div>
           </div>
         </div>
       </header>
