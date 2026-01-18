@@ -128,7 +128,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
           <div className="space-y-5">
             {isRegister && (
               <div className="group">
-                <label className="block text-sm font-medium text-gray-600 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Nom complet
                 </label>
                 <div className="relative">
@@ -147,7 +147,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
 
             {/* Email */}
             <div className="group">
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Adresse email
               </label>
             <div className="relative">
@@ -166,13 +166,13 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
             {/* Mot de passe */}
             <div className="group">
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-gray-600">
+                <label className="block text-sm font-medium text-gray-300">
                   Mot de passe
                 </label>
                 {!isRegister && (
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-300 transition-colors"
+                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
                     onClick={onClose}
                   >
                     Mot de passe oublié ?
@@ -223,7 +223,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
             {isRegister ? 'Déjà un compte ? ' : 'Pas encore de compte ? '}
             <button
               onClick={onToggleRegister}
-              className="text-blue-600 hover:text-blue-300 transition-colors font-medium"
+              className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
             >
               {isRegister ? 'Se connecter' : 'S\'inscrire'}
             </button>
