@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { api } from '@/lib/api';
-import logoWhite from '@/assets/logo_white.svg';
+import LogoWhite from '@/assets/logo_white.svg?react';
 
 interface RegisterProps {
   onSuccess: () => void;
@@ -94,11 +94,7 @@ export function Register({ onSuccess }: RegisterProps) {
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               className="flex justify-center mb-6"
             >
-              <img 
-                src={logoWhite}
-                alt="RénoPilot"
-                className="h-16 w-auto"
-              />
+              <LogoWhite className="h-16 w-auto" />
             </motion.div>
             <h1 className="text-3xl font-display font-bold text-white mb-2">
               Créer un compte
@@ -249,7 +245,7 @@ export function Register({ onSuccess }: RegisterProps) {
             <Button
               type="submit"
               className="w-full h-14 text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-500/25"
-              disabled={isLoading || !email || !password || !name || !confirmPassword || !isPasswordValid || !passwordsMatch}
+              disabled={Boolean(isLoading || !email || !password || !name || !confirmPassword || !isPasswordValid || !passwordsMatch)}
             >
               {isLoading ? (
                 <>

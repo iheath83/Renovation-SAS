@@ -19,8 +19,8 @@ import { api } from '@/lib/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import logoBlack from '@/assets/logo_black.svg';
-import logoWhite from '@/assets/logo_white.svg';
+import LogoBlack from '@/assets/logo_black.svg?react';
+import LogoWhite from '@/assets/logo_white.svg?react';
 
 interface NavbarProps {
   isMobileMenuOpen: boolean;
@@ -73,11 +73,11 @@ export function Navbar({ isMobileMenuOpen, onToggleMobileMenu }: NavbarProps) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <img 
-                src={theme === 'dark' ? logoWhite : logoBlack}
-                alt="RénoPilot"
-                className="h-10 w-auto"
-              />
+              {theme === 'dark' ? (
+                <LogoWhite className="h-10 w-auto" />
+              ) : (
+                <LogoBlack className="h-10 w-auto" />
+              )}
             </div>
 
             {/* Desktop Navigation */}
