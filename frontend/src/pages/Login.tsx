@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { api } from '@/lib/api';
 import LogoBlack from '@/assets/logo_black.svg?react';
+import LogoWhite from '@/assets/logo_white.svg?react';
 
 interface LoginModalProps {
   onClose: () => void;
@@ -87,9 +88,9 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white/95 backdrop-blur-xl border border-gray-300/50 rounded-3xl p-10 w-full max-w-md shadow-2xl"
+        className="bg-slate-800/95 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-10 w-full max-w-md shadow-2xl"
       >
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
           <X className="w-6 h-6" />
         </button>
 
@@ -101,12 +102,12 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
             className="flex justify-center mb-6"
           >
-            <LogoBlack className="h-16 w-auto" />
+            <LogoWhite className="h-16 w-auto" />
             </motion.div>
-          <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-display font-bold text-white mb-2">
             {isRegister ? 'Créer un compte' : 'Connexion'}
           </h2>
-          <p className="text-gray-500">
+          <p className="text-gray-400">
             {isRegister ? 'Rejoignez RénoVision gratuitement' : 'Accédez à votre espace de gestion'}
             </p>
           </div>
@@ -131,13 +132,13 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                   Nom complet
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
                   <Input
                     type="text"
                     placeholder="Jean Dupont"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="pl-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
@@ -150,13 +151,13 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                 Adresse email
               </label>
             <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
               <Input
                 type="email"
                   placeholder="jean@exemple.fr"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 required
               />
               </div>
@@ -179,19 +180,19 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                 )}
               </div>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-12 pr-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="pl-12 pr-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-900 transition-colors z-10"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -201,7 +202,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
 
             <Button
               type="submit"
-            className="w-full h-14 text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-500/25"
+            className="w-full h-14 text-white text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-500/25"
             disabled={isLoading || !email || !password || (isRegister && !name)}
             >
               {isLoading ? (
@@ -218,7 +219,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
           </form>
 
         <div className="mt-8 text-center">
-          <p className="text-gray-500">
+          <p className="text-gray-400">
             {isRegister ? 'Déjà un compte ? ' : 'Pas encore de compte ? '}
             <button
               onClick={onToggleRegister}
@@ -430,10 +431,17 @@ export function Login({ onSuccess }: LoginProps) {
             <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">Témoignages</a>
           </nav>
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" onClick={() => { setShowLoginModal(true); setIsRegister(false); }}>
+            <Button 
+              variant="ghost" 
+              onClick={() => { setShowLoginModal(true); setIsRegister(false); }}
+              className="text-gray-600 hover:text-gray-900"
+            >
               Se connecter
             </Button>
-            <Button onClick={() => { setShowLoginModal(true); setIsRegister(true); }}>
+            <Button 
+              onClick={() => { setShowLoginModal(true); setIsRegister(true); }}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
               Commencer
             </Button>
           </div>
@@ -498,7 +506,7 @@ export function Login({ onSuccess }: LoginProps) {
           >
             <Button 
               size="lg" 
-              className="text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500"
+              className="text-white text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500"
               onClick={() => { setShowLoginModal(true); setIsRegister(true); }}
             >
               Commencer gratuitement
@@ -738,7 +746,7 @@ export function Login({ onSuccess }: LoginProps) {
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-gray-900 text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold">
                     Le plus populaire
                   </div>
                 )}
@@ -764,7 +772,7 @@ export function Login({ onSuccess }: LoginProps) {
                 <Button
                   className={`w-full ${
                     plan.highlighted
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500'
+                      ? 'bg-gradient-to-r text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500'
                       : 'bg-slate-700 hover:bg-slate-600'
                   }`}
                   onClick={() => { setShowLoginModal(true); setIsRegister(true); }}
@@ -832,7 +840,7 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
             Prêt à transformer vos projets de rénovation ?
           </motion.h2>
