@@ -30,7 +30,7 @@ import {
   CreditCard,
 } from 'lucide-react';
 import { api } from '@/lib/api';
-import LogoWhite from '@/assets/logo_white.svg?react';
+import LogoBlack from '@/assets/logo_black.svg?react';
 
 interface LoginModalProps {
   onClose: () => void;
@@ -75,7 +75,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
   };
 
   return (
-    <motion.div
+        <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -87,57 +87,57 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-slate-800/95 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-10 w-full max-w-md shadow-2xl"
+        className="bg-white/95 backdrop-blur-xl border border-gray-300/50 rounded-3xl p-10 w-full max-w-md shadow-2xl"
       >
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors">
           <X className="w-6 h-6" />
         </button>
 
-        {/* Logo */}
+          {/* Logo */}
         <div className="text-center mb-10">
-          <motion.div
+            <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
             className="flex justify-center mb-6"
           >
-            <LogoWhite className="h-16 w-auto" />
-          </motion.div>
-          <h2 className="text-3xl font-display font-bold text-white mb-2">
+            <LogoBlack className="h-16 w-auto" />
+            </motion.div>
+          <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">
             {isRegister ? 'Créer un compte' : 'Connexion'}
           </h2>
-          <p className="text-gray-400">
+          <p className="text-gray-500">
             {isRegister ? 'Rejoignez RénoVision gratuitement' : 'Accédez à votre espace de gestion'}
-          </p>
-        </div>
+            </p>
+          </div>
 
-        {/* Form */}
+          {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
               className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30"
-            >
+              >
               <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
               <span className="text-sm text-red-400 leading-relaxed">{error}</span>
-            </motion.div>
+              </motion.div>
           )}
 
           <div className="space-y-5">
             {isRegister && (
               <div className="group">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-600 mb-2">
                   Nom complet
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
                   <Input
                     type="text"
                     placeholder="Jean Dupont"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="pl-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
@@ -146,32 +146,32 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
 
             {/* Email */}
             <div className="group">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-600 mb-2">
                 Adresse email
               </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
-                <Input
-                  type="email"
+            <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
+              <Input
+                type="email"
                   placeholder="jean@exemple.fr"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                  required
-                />
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                  className="pl-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                required
+              />
               </div>
             </div>
 
             {/* Mot de passe */}
             <div className="group">
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-gray-300">
+                <label className="block text-sm font-medium text-gray-600">
                   Mot de passe
                 </label>
                 {!isRegister && (
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                    className="text-sm text-blue-600 hover:text-blue-300 transition-colors"
                     onClick={onClose}
                   >
                     Mot de passe oublié ?
@@ -179,50 +179,50 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                 )}
               </div>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-400 transition-colors z-10" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors z-10" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-12 pr-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="pl-12 pr-12 h-14 bg-gray-50/50 border-gray-300/50 text-gray-900 placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-900 transition-colors z-10"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+              </div>
             </div>
-          </div>
 
-          <Button
-            type="submit"
+            <Button
+              type="submit"
             className="w-full h-14 text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-500/25"
             disabled={isLoading || !email || !password || (isRegister && !name)}
-          >
-            {isLoading ? (
-              <>
+            >
+              {isLoading ? (
+                <>
                 <Loader2 className="w-5 h-5 animate-spin" />
                 {isRegister ? 'Inscription...' : 'Connexion...'}
-              </>
-            ) : (
-              <>
+                </>
+              ) : (
+                <>
                 {isRegister ? 'S\'inscrire' : 'Se connecter'}
-              </>
-            )}
-          </Button>
-        </form>
+                </>
+              )}
+            </Button>
+          </form>
 
         <div className="mt-8 text-center">
-          <p className="text-gray-400">
+          <p className="text-gray-500">
             {isRegister ? 'Déjà un compte ? ' : 'Pas encore de compte ? '}
             <button
               onClick={onToggleRegister}
-              className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+              className="text-blue-600 hover:text-blue-300 transition-colors font-medium"
             >
               {isRegister ? 'Se connecter' : 'S\'inscrire'}
             </button>
@@ -417,17 +417,17 @@ export function Login({ onSuccess }: LoginProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gray-50/80 backdrop-blur-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center">
-            <LogoWhite className="h-10 w-auto" />
+            <LogoBlack className="h-10 w-auto" />
           </div>
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-300 hover:text-white transition-colors">Fonctionnalités</a>
-            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Tarifs</a>
-            <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Témoignages</a>
+            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Fonctionnalités</a>
+            <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Tarifs</a>
+            <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">Témoignages</a>
           </nav>
           <div className="flex items-center space-x-4">
             <Button variant="ghost" onClick={() => { setShowLoginModal(true); setIsRegister(false); }}>
@@ -461,7 +461,7 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-600 text-sm mb-8"
           >
             <Sparkles className="w-4 h-4" />
             <span>La solution de gestion de rénovation #1 en France</span>
@@ -471,11 +471,11 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-extrabold leading-tight text-white mb-6"
+            className="text-5xl md:text-7xl font-extrabold leading-tight text-gray-900 mb-6"
           >
             Pilotez vos Rénovations
             <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               avec Simplicité
             </span>
           </motion.h1>
@@ -484,7 +484,7 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto"
           >
             La plateforme tout-en-un pour gérer budget, planning, matériaux et inspiration. 
             Transformez votre projet de rénovation en succès garanti.
@@ -507,7 +507,7 @@ export function Login({ onSuccess }: LoginProps) {
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-lg px-8 py-6 border-2 border-slate-700 hover:border-slate-600"
+              className="text-lg px-8 py-6 border-2 border-gray-300 hover:border-slate-600"
               onClick={() => { setShowLoginModal(true); setIsRegister(false); }}
             >
               Voir la démo
@@ -523,10 +523,10 @@ export function Login({ onSuccess }: LoginProps) {
           >
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
                   {stat.value}
                 </div>
-                <div className="text-gray-400 text-sm mt-1">{stat.label}</div>
+                <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -534,10 +534,10 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-12 border-y border-slate-800 bg-slate-900/50">
+      <section className="py-12 border-y border-gray-200 bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-gray-400 text-sm uppercase tracking-wider">Ils nous font confiance</p>
+            <p className="text-gray-500 text-sm uppercase tracking-wider">Ils nous font confiance</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-12">
             {trustedBy.map((item, index) => (
@@ -549,8 +549,8 @@ export function Login({ onSuccess }: LoginProps) {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl font-bold text-white">{item.count}</div>
-                <div className="text-gray-400 text-sm">{item.name}</div>
+                <div className="text-3xl font-bold text-gray-900">{item.count}</div>
+                <div className="text-gray-500 text-sm">{item.name}</div>
               </motion.div>
             ))}
           </div>
@@ -558,14 +558,14 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-slate-900">
+      <section id="features" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-sm mb-6"
             >
               <Star className="w-4 h-4" />
               <span>Fonctionnalités puissantes</span>
@@ -574,17 +574,17 @@ export function Login({ onSuccess }: LoginProps) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
             >
               Tout ce dont vous avez besoin,
               <br />
-              <span className="text-blue-400">au même endroit</span>
+              <span className="text-blue-600">au même endroit</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
               RénoVision centralise tous les aspects de votre rénovation pour vous faire gagner du temps et de l'argent.
             </motion.p>
@@ -598,13 +598,13 @@ export function Login({ onSuccess }: LoginProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300"
+                className="group bg-white/50 border border-gray-300 rounded-2xl p-8 hover:border-blue-500/50 hover:bg-white transition-all duration-300"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-7 h-7 text-white" />
+                  <feature.icon className="w-7 h-7 text-gray-900" />
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-3">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -612,16 +612,16 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 bg-slate-950">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
             >
-              Pourquoi choisir <span className="text-purple-400">RénoVision</span> ?
+              Pourquoi choisir <span className="text-purple-700">RénoVision</span> ?
             </motion.h2>
           </div>
 
@@ -636,10 +636,10 @@ export function Login({ onSuccess }: LoginProps) {
                 className="text-center"
               >
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30 flex items-center justify-center mb-6 mx-auto">
-                  <benefit.icon className="w-10 h-10 text-blue-400" />
+                  <benefit.icon className="w-10 h-10 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-3">{benefit.title}</h3>
-                <p className="text-gray-300">{benefit.description}</p>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
+                <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -647,22 +647,22 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Advanced Features Section */}
-      <section className="py-24 bg-slate-900">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
             >
-              Des fonctionnalités <span className="text-blue-400">avancées</span>
+              Des fonctionnalités <span className="text-blue-600">avancées</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
               Découvrez tous les outils qui feront de votre rénovation un véritable succès
             </motion.p>
@@ -676,18 +676,18 @@ export function Login({ onSuccess }: LoginProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-blue-500/50 transition-all"
+                className="bg-white/50 border border-gray-300 rounded-2xl p-8 hover:border-blue-500/50 transition-all"
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-6 h-6 text-blue-400" />
+                    <feature.icon className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                    <p className="text-gray-300 mb-4">{feature.description}</p>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                    <p className="text-gray-600 mb-4">{feature.description}</p>
                     <ul className="space-y-2">
                       {feature.features.map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-gray-400 text-sm">
+                        <li key={idx} className="flex items-center gap-2 text-gray-500 text-sm">
                           <Check className="w-4 h-4 text-green-400" />
                           {item}
                         </li>
@@ -702,22 +702,22 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-slate-950">
+      <section id="pricing" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
             >
-              Des tarifs <span className="text-blue-400">transparents</span>
+              Des tarifs <span className="text-blue-600">transparents</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-300"
+              className="text-xl text-gray-600"
             >
               Choisissez le plan qui correspond à vos besoins
             </motion.p>
@@ -734,21 +734,21 @@ export function Login({ onSuccess }: LoginProps) {
                 className={`relative rounded-3xl p-8 ${
                   plan.highlighted
                     ? 'bg-gradient-to-b from-blue-600/20 to-purple-600/20 border-2 border-blue-500 shadow-2xl shadow-blue-500/20 scale-105'
-                    : 'bg-slate-800/50 border border-slate-700'
+                    : 'bg-white/50 border border-gray-300'
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-gray-900 text-sm font-semibold">
                     Le plus populaire
                   </div>
                 )}
 
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{plan.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <p className="text-gray-500 text-sm mb-4">{plan.description}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-5xl font-bold text-white">{plan.price}</span>
-                    {plan.period && <span className="text-gray-400">{plan.period}</span>}
+                    <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
+                    {plan.period && <span className="text-gray-500">{plan.period}</span>}
                   </div>
                 </div>
 
@@ -756,7 +756,7 @@ export function Login({ onSuccess }: LoginProps) {
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-gray-600">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -778,16 +778,16 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-slate-900">
+      <section id="testimonials" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
             >
-              Ce que nos clients <span className="text-purple-400">disent de nous</span>
+              Ce que nos clients <span className="text-purple-700">disent de nous</span>
             </motion.h2>
           </div>
 
@@ -799,19 +799,19 @@ export function Login({ onSuccess }: LoginProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8"
+                className="bg-white/50 border border-gray-300 rounded-2xl p-8"
               >
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-300 mb-6 italic">"{testimonial.text}"</p>
+                <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
                 <div className="flex items-center gap-3">
                   <div className="text-4xl">{testimonial.image}</div>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-gray-400">{testimonial.role}</div>
+                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                    <div className="text-sm text-gray-500">{testimonial.role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -821,7 +821,7 @@ export function Login({ onSuccess }: LoginProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-900 to-purple-900 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-blue-600 to-purple-600 relative overflow-hidden">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.1 }}
@@ -832,7 +832,7 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
             Prêt à transformer vos projets de rénovation ?
           </motion.h2>
@@ -841,7 +841,7 @@ export function Login({ onSuccess }: LoginProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-blue-100 mb-10"
+            className="text-xl text-white mb-10"
           >
             Rejoignez des milliers d'utilisateurs qui ont simplifié la gestion de leurs chantiers avec RénoVision.
           </motion.p>
@@ -860,46 +860,46 @@ export function Login({ onSuccess }: LoginProps) {
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </motion.div>
-          <p className="text-blue-200 text-sm mt-6">Aucune carte bancaire requise • Accès immédiat</p>
+          <p className="text-blue-50 text-sm mt-6">Aucune carte bancaire requise • Accès immédiat</p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-slate-950 border-t border-slate-800">
+      <footer className="py-12 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <LogoWhite className="h-10 w-auto mb-4" />
-              <p className="text-gray-400 text-sm">
+              <LogoBlack className="h-10 w-auto mb-4" />
+              <p className="text-gray-500 text-sm">
                 La solution de gestion de rénovation la plus complète du marché.
               </p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">Produit</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="#features" className="hover:text-white transition-colors">Fonctionnalités</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Tarifs</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              <h4 className="text-gray-900 font-semibold mb-4">Produit</h4>
+              <ul className="space-y-2 text-gray-500 text-sm">
+                <li><a href="#features" className="hover:text-gray-900 transition-colors">Fonctionnalités</a></li>
+                <li><a href="#pricing" className="hover:text-gray-900 transition-colors">Tarifs</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">FAQ</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">Entreprise</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">À propos</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <h4 className="text-gray-900 font-semibold mb-4">Entreprise</h4>
+              <ul className="space-y-2 text-gray-500 text-sm">
+                <li><a href="#" className="hover:text-gray-900 transition-colors">À propos</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Contact</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">Légal</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">CGU</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Confidentialité</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cookies</a></li>
+              <h4 className="text-gray-900 font-semibold mb-4">Légal</h4>
+              <ul className="space-y-2 text-gray-500 text-sm">
+                <li><a href="#" className="hover:text-gray-900 transition-colors">CGU</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Confidentialité</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Cookies</a></li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-slate-800 text-center text-gray-500 text-sm">
+          <div className="pt-8 border-t border-gray-200 text-center text-gray-500 text-sm">
             <p>&copy; {new Date().getFullYear()} RénoVision. Tous droits réservés.</p>
           </div>
         </div>
