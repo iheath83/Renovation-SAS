@@ -1,6 +1,5 @@
 // Client API pour communiquer avec le backend
 
-// @ts-expect-error Vite env
 const API_URL = import.meta.env?.VITE_API_URL || 'http://localhost:3001/api';
 
 interface ApiResponse<T> {

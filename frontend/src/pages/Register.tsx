@@ -29,7 +29,7 @@ export function Register({ onSuccess }: RegisterProps) {
   };
 
   const isPasswordValid = Object.values(passwordValidation).every(Boolean);
-  const passwordsMatch = password && confirmPassword && password === confirmPassword;
+  const passwordsMatch = Boolean(password && confirmPassword && password === confirmPassword);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
