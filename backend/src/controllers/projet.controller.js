@@ -330,17 +330,6 @@ export const importProjet = async (req, res) => {
           })),
         },
       },
-    });
-          create: (importData.ideesPinterest || []).map(idee => ({
-            titre: idee.titre,
-            description: idee.description,
-            url: idee.url,
-            imageUrl: idee.imageUrl,
-            tags: idee.tags,
-            couleurs: idee.couleurs,
-          })),
-        },
-      },
       include: {
         users: { where: { userId }, select: { role: true } },
       },
