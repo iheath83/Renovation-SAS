@@ -37,12 +37,13 @@ services:
     labels:
       # Traefik labels pour l'API
       - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.renovision-api.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)"
       - "traefik.http.routers.renovision-api.entrypoints=websecure"
       - "traefik.http.routers.renovision-api.tls=true"
       - "traefik.http.routers.renovision-api.tls.certresolver=letsencrypt"
       - "traefik.http.services.renovision-api.loadbalancer.server.port=3000"
-      - "traefik.http.routers.renovision-api.priority=10"
+      - "traefik.http.routers.renovision-api.priority=100"
 
   # Frontend React
   frontend:
@@ -67,6 +68,7 @@ services:
     labels:
       # Traefik labels pour le frontend
       - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.renovision-frontend.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.renovision-frontend.entrypoints=websecure"
       - "traefik.http.routers.renovision-frontend.tls=true"
