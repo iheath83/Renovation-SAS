@@ -467,7 +467,7 @@ export function Login({ onSuccess }: LoginProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
+            className="flex justify-center"
           >
             <Button 
               size="lg" 
@@ -476,14 +476,6 @@ export function Login({ onSuccess }: LoginProps) {
             >
               Commencer gratuitement
               <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-lg px-8 py-6 border-2 border-gray-300 hover:border-slate-600"
-              onClick={() => { setShowLoginModal(true); setIsRegister(false); }}
-            >
-              Voir la démo
             </Button>
           </motion.div>
         </div>
