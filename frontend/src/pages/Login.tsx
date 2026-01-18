@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { 
@@ -30,7 +30,6 @@ import {
   Image as ImageIcon,
   CreditCard,
 } from 'lucide-react';
-import { useAuthState } from '@/hooks/useAuth';
 import { api } from '@/lib/api';
 import LogoWhite from '@/assets/logo_white.svg?react';
 
@@ -38,17 +37,16 @@ interface LoginModalProps {
   onClose: () => void;
   isRegister: boolean;
   onToggleRegister: () => void;
+  onSuccess: () => void;
 }
 
-function LoginModal({ onClose, isRegister, onToggleRegister }: LoginModalProps) {
+function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const { login } = useAuthState();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,8 +62,8 @@ function LoginModal({ onClose, isRegister, onToggleRegister }: LoginModalProps) 
       }
 
       if (result.success) {
-        navigate('/');
         onClose();
+        onSuccess(); // Appeler le callback de succès
       } else {
         setError(result.error?.message || 'Erreur de connexion');
       }
@@ -236,7 +234,11 @@ function LoginModal({ onClose, isRegister, onToggleRegister }: LoginModalProps) 
   );
 }
 
-export function Login() {
+interface LoginProps {
+  onSuccess: () => void;
+}
+
+export function Login({ onSuccess }: LoginProps) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
@@ -911,6 +913,7 @@ export function Login() {
             onClose={() => setShowLoginModal(false)}
             isRegister={isRegister}
             onToggleRegister={() => setIsRegister(prev => !prev)}
+            onSuccess={onSuccess}
           />
         )}
       </AnimatePresence>
