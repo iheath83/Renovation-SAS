@@ -7,7 +7,6 @@ import {
   Package,
   PiggyBank,
   Sparkles,
-  Building2,
   Menu,
   X,
   Settings,
