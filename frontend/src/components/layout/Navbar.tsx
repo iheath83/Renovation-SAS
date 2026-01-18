@@ -40,7 +40,6 @@ const navItems = [
   { to: '/taches', icon: CheckSquare, label: 'Tâches' },
   { to: '/materiaux', icon: Package, label: 'Matériaux' },
   { to: '/budget', icon: PiggyBank, label: 'Budget' },
-  { to: '/banque', icon: Building2, label: 'Banque' },
   { to: '/inspiration', icon: Sparkles, label: 'Inspiration' },
 ];
 
