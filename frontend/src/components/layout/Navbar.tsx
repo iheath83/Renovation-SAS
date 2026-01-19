@@ -49,14 +49,18 @@ export function Navbar({ isMobileMenuOpen, onToggleMobileMenu }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const fetchUser = async () => {
       try {
-        setUser(JSON.parse(storedUser));
-      } catch {
-        // Ignore
+        const result = await api.getMe();
+        if (result.success && result.data) {
+          setUser(result.data as User);
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
       }
-    }
+    };
+    
+    fetchUser();
   }, []);
 
   const handleLogout = () => {

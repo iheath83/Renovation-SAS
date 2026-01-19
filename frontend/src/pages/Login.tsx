@@ -138,7 +138,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                     placeholder="Jean Dupont"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 !text-white placeholder:!text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
@@ -157,7 +157,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                   placeholder="jean@exemple.fr"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="pl-12 h-14 bg-slate-900/50 border-slate-700/50 !text-white placeholder:!text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 required
               />
               </div>
@@ -186,7 +186,7 @@ function LoginModal({ onClose, isRegister, onToggleRegister, onSuccess }: LoginM
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-12 pr-12 h-14 bg-slate-900/50 border-slate-700/50 text-white placeholder:text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="pl-12 pr-12 h-14 bg-slate-900/50 border-slate-700/50 !text-white placeholder:!text-gray-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   required
                 />
                 <button

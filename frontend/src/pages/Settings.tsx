@@ -110,16 +110,19 @@ function CompteSection() {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const fetchUser = async () => {
       try {
-        const userData = JSON.parse(storedUser);
-        setUser(userData);
-        setFormData({ name: userData.name || '', email: userData.email || '' });
-      } catch {
-        // Ignore
+        const result = await api.getMe();
+        if (result.success && result.data) {
+          setUser(result.data);
+          setFormData({ name: result.data.name || '', email: result.data.email || '' });
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
       }
-    }
+    };
+    
+    fetchUser();
   }, []);
 
   const handleChange = (field: string, value: string) => {
@@ -134,15 +137,18 @@ function CompteSection() {
     try {
       const result = await api.updateUser(formData);
       if (result.success) {
-        const updatedUser = { ...user, ...formData };
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUser(updatedUser);
+        // Refetch user data to get updated info
+        const meResult = await api.getMe();
+        if (meResult.success && meResult.data) {
+          setUser(meResult.data);
+          setFormData({ name: meResult.data.name || '', email: meResult.data.email || '' });
+        }
         setHasChanges(false);
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
       }
-    } catch {
-      // Handle error
+    } catch (error) {
+      console.error('Error updating user:', error);
     } finally {
       setIsSaving(false);
     }
